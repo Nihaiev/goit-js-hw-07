@@ -1,8 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
-
 const markup = galleryItems
   .map(({ preview, original, description }) => {
     return `
@@ -47,3 +45,7 @@ function onGalleryItemClick(evt) {
     window.removeEventListener('keydown', onOpenGalleryItemKeydown);
   }
 }
+
+console.log(galleryItems);
+
+
