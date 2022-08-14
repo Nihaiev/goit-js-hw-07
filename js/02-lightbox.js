@@ -1,8 +1,5 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-
-console.log(galleryItems);
-
 const markup = galleryItems
   .map(({ preview, original, description }) => {
     return `
@@ -18,17 +15,11 @@ const markup = galleryItems
 const gallaryList = document.querySelector('.gallery');
 gallaryList.insertAdjacentHTML('beforeend', markup);
 
-gallaryList.addEventListener('click', onGalleryItemClick);
+let galleryLightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
-function onGalleryItemClick(evt) {
-  evt.preventDefault();
+console.log(galleryItems);
 
-  if (evt.target.nodeName !== 'IMG') {
-    return;
-  }
 
-  let galleryLightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
-}
