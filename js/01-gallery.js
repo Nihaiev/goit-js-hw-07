@@ -3,8 +3,9 @@ import { galleryItems } from './gallery-items.js';
 
 console.log(galleryItems);
 
-const markup = galleryItems.map (({preview, original, description}) => {
-     return `
+const markup = galleryItems
+  .map(({ preview, original, description }) => {
+    return `
         <div class="gallery__item">
             <a class="gallery__link" href="${original}">
                 <img
@@ -14,37 +15,35 @@ const markup = galleryItems.map (({preview, original, description}) => {
                 alt="${description}"
                 />
             </a>
-        </div>`
-}) .join("");
-console.log(markup);
+        </div>`;
+  })
+  .join('');
 
 const gallaryList = document.querySelector('.gallery');
 gallaryList.insertAdjacentHTML('beforeend', markup);
 
 // Відкриття модального вікна по кліку на елементі галереї
 
-gallaryList.addEventListener ('click', onGalleryItemClick )
+gallaryList.addEventListener('click', onGalleryItemClick);
 
-function onGalleryItemClick(evt){
+function onGalleryItemClick(evt) {
+  evt.preventDefault();
 
-    evt.preventDefault();
-
-    if (evt.target.nodeName !== "IMG") {
+  if (evt.target.nodeName !== 'IMG') {
     return;
-    }
-    console.log(evt.target)
-    
-// Закриття модального вікна після натискання клавіші Escape
-    const selectedImg = basicLightbox.create(`
-    <img src="${evt.target.dataset.source}">`)
-    selectedImg.show()
+  }
+  console.log(evt.target);
 
-    window.addEventListener('keydown', onOpenGalleryItemKeydown)
-    function onOpenGalleryItemKeydown (evt){
+  // Закриття модального вікна після натискання клавіші Escape
+  const selectedImg = basicLightbox.create(`
+    <img src="${evt.target.dataset.source}">`);
+  selectedImg.show();
+
+  window.addEventListener('keydown', onOpenGalleryItemKeydown);
+  function onOpenGalleryItemKeydown(evt) {
     if (evt.code == 'Escape') {
-        selectedImg.close() 
-        } 
-    window.removeEventListener("keydown", onOpenGalleryItemKeydown);      
-    }   
-   
+      selectedImg.close();
+    }
+    window.removeEventListener('keydown', onOpenGalleryItemKeydown);
+  }
 }
